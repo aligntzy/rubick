@@ -6,11 +6,11 @@
 package main
 
 import (
-	"helloworld/internal/biz"
-	"helloworld/internal/conf"
-	"helloworld/internal/data"
-	"helloworld/internal/server"
-	"helloworld/internal/service"
+	"github.com/aligntzy/rubick/app/geo/internal/biz"
+	"github.com/aligntzy/rubick/app/geo/internal/conf"
+	"github.com/aligntzy/rubick/app/geo/internal/data"
+	"github.com/aligntzy/rubick/app/geo/internal/server"
+	"github.com/aligntzy/rubick/app/geo/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"

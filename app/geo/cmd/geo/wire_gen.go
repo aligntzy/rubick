@@ -7,14 +7,17 @@
 package main
 
 import (
-	"helloworld/internal/biz"
-	"helloworld/internal/conf"
-	"helloworld/internal/data"
-	"helloworld/internal/server"
-	"helloworld/internal/service"
-
+	"github.com/aligntzy/rubick/app/geo/internal/biz"
+	"github.com/aligntzy/rubick/app/geo/internal/conf"
+	"github.com/aligntzy/rubick/app/geo/internal/data"
+	"github.com/aligntzy/rubick/app/geo/internal/server"
+	"github.com/aligntzy/rubick/app/geo/internal/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
+)
+
+import (
+	_ "go.uber.org/automaxprocs"
 )
 
 // Injectors from wire.go:
@@ -25,11 +28,11 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	if err != nil {
 		return nil, nil, err
 	}
-	greeterRepo := data.NewGreeterRepo(dataData, logger)
-	greeterUsecase := biz.NewGreeterUsecase(greeterRepo, logger)
-	greeterService := service.NewGreeterService(greeterUsecase)
-	grpcServer := server.NewGRPCServer(confServer, greeterService, logger)
-	httpServer := server.NewHTTPServer(confServer, greeterService, logger)
+	geoRepo := data.NewGEORepo(dataData, logger)
+	geoUseCase := biz.NewGEOUseCase(geoRepo, logger)
+	geoService := service.NewGEOService(geoUseCase)
+	grpcServer := server.NewGRPCServer(confServer, geoService, logger)
+	httpServer := server.NewHTTPServer(confServer, geoService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()

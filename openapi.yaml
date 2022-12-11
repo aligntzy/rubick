@@ -3,21 +3,17 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
-    description: The greeting service definition.
+    title: GEO API
     version: 0.0.1
 paths:
-    /helloworld/{name}:
+    /geo/v1/locations:
         get:
             tags:
-                - Greeter
-                - subgroup
-            description: Sends a greeting
-            operationId: Greeter_SayHello
+                - GEO
+            operationId: GEO_Location
             parameters:
-                - name: name
-                  in: path
-                  required: true
+                - name: ip
+                  in: query
                   schema:
                     type: string
             responses:
@@ -26,14 +22,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+                                $ref: '#/components/schemas/api.geo.v1.LocationReply'
 components:
     schemas:
-        helloworld.v1.HelloReply:
+        api.geo.v1.LocationReply:
             type: object
             properties:
                 message:
                     type: string
-            description: The response message containing the greetings
 tags:
-    - name: Greeter
+    - name: GEO

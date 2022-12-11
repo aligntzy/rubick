@@ -47,7 +47,7 @@ api:
 .PHONY: wire
 # generate wire
 wire:
-	find app/* -maxdepth 0 -type d -print | xargs -L 1 bash -c 'cd "$$0" && pwd && $(MAKE) wire'
+	cd cmd/geo && wire
 
 .PHONY: build
 # build

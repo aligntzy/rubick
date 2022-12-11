@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package api.geo.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/aligntzy/rubick/api/geo/v1;v1";
+
+service GEO {
+    rpc Location(LocationRequest) returns (LocationReply) {
+		option (google.api.http) = {
+            get: "/geo/v1/locations"
+        };
+	}
+}
+
+message LocationRequest {
+    string ip = 1;
+}
+
+message LocationReply {
+    string message = 1;
+}
