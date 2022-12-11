@@ -19,5 +19,6 @@ message LocationRequest {
 }
 
 message LocationReply {
-    string message = 1;
+    string country = 1;
+    string city = 2;
 }

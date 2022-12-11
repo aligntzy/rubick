@@ -28,7 +28,9 @@ components:
         api.geo.v1.LocationReply:
             type: object
             properties:
-                message:
+                country:
+                    type: string
+                city:
                     type: string
 tags:
     - name: GEO

@@ -1,10 +1,20 @@
 package biz
 
-import "github.com/go-kratos/kratos/v2/log"
+import (
+	"context"
 
-type Location struct{}
+	"github.com/go-kratos/kratos/v2/log"
+)
 
-type GEORepo interface{}
+type Location struct {
+	IP      string
+	Country string
+	City    string
+}
+
+type GEORepo interface {
+	Location(ctx context.Context, ip string) (*Location, error)
+}
 
 type GEOUseCase struct {
 	repo GEORepo
@@ -16,4 +26,8 @@ func NewGEOUseCase(repo GEORepo, logger log.Logger) *GEOUseCase {
 		repo: repo,
 		log:  log.NewHelper(logger),
 	}
+}
+
+func (uc *GEOUseCase) Location(ctx context.Context, ip string) (*Location, error) {
+	return uc.repo.Location(ctx, ip)
 }

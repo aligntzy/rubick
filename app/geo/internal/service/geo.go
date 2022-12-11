@@ -18,5 +18,13 @@ func NewGEOService(uc *biz.GEOUseCase) *GEOService {
 }
 
 func (s *GEOService) Location(ctx context.Context, req *pb.LocationRequest) (*pb.LocationReply, error) {
-	return &pb.LocationReply{}, nil
+	loc, err := s.uc.Location(ctx, req.Ip)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.LocationReply{
+		Country: loc.Country,
+		City:    loc.City,
+	}, nil
 }
